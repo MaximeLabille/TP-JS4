@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP JS4</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <h1>TP JS4</h1>
+    <div class="container" id="container">
+        <div id="buttons">
+            <button onclick="table(4, 3)">Afficher tableau</button>
+            <button onclick="table(Number(prompt('Combien de lignes?')), 3)">Tableau 2</button>
+            <button onclick="showchar(prompt('Veullier entrer du texte'))">Chaine de caractères</button>
+            <button onclick="login()">Se connecter</button>
+            <button disabled>Connexion 2</button>
+            <button onclick="loginthree()">Connexion 3</button>
+            <button disabled>Couleurs</button>
+            <button onclick="addline()">Ajout d'une ligne</button>
+            <button onclick="bonus()">Bonus</button>
+        </div>
+        
+    </div>
+    <div class="container-alt">
+        <div id="tablecontrols" style="display: none;" hidden>
+            <input id="tc_name" placeholder="Nom" />
+            <input id="tc_lastname" placeholder="Prenom" />
+            <button onclick="addline()">Ajout d'une ligne</button>  
+        </div>
+        <table id="table" hidden>
+        </table>
+        <text id="text"></text>
+        <button onclick="refresh()" id="refresh" hidden>Refresh page</button>
+    </div>
+    <!--IGNOREZ CA--><style>.a {transition: all 300ms;white-space: nowrap;max-width: 50px;overflow-x: hidden;opacity: 0.1;position: fixed;bottom: 0;right: 0;margin: 4px;padding: 8px;background-color: #110c0c;border: 4px solid #1eb854;border-radius: 8px;}.a:hover {opacity: 1;max-width:999px;padding-left: 32px;padding-right: 32px;}</style><div class="a"><a href="/" style="color: white;">Retour a maximelabille.github.io</a></div>
+</body>
+
+</html>
