@@ -1,3 +1,23 @@
+// tableaddline : take an indefinite number of column and create a line with it
+function tableaddline(isheader, ...col) {
+    let table = document.getElementById("table");
+    let container = document.getElementById("container");
+    let refresh = document.getElementById("refresh");
+    table.hidden = false;
+    container.style.display = "none";
+    let tr = document.createElement("tr");
+    for (let i = 0; i < col.length; i++) {
+        let td = document.createElement("td");
+        if (isheader == true) {
+            td.classList.add("tablehead");
+        }
+        td.innerHTML = col[i];
+        tr.appendChild(td);
+    }
+    table.appendChild(tr);
+    refresh.hidden = false;
+}
+
 function table(row, col) {
     let table = document.getElementById("table");
     let container = document.getElementById("container");
@@ -23,7 +43,6 @@ function showchar(text) {
     table.hidden = false;
     container.style.display = "none";
     result = (text.toUpperCase() + "<br />" + text.toLowerCase() + "<br /> il y a " + text.length + " caractères dans le texte<br />le texte commence par la lettre " + text.charAt(0));
-    console.log(result);
     textele.innerHTML = result;
     refresh.hidden = false;
 }
@@ -69,10 +88,7 @@ function loginthree() {
 }
 
 function addline() {
-    let table = document.getElementById("table");
     let tablecontrols = document.getElementById("tablecontrols");
-    let container = document.getElementById("container");
-    let refresh = document.getElementById("refresh");
 
     const tc_name = document.getElementById("tc_name");
     const tc_lastname = document.getElementById("tc_lastname");
@@ -81,42 +97,15 @@ function addline() {
         name_ = prompt("Entrez un nom");
         lastname_ = prompt("Entrez un prenom");
         // create the table base
-        let tr = document.createElement("tr");
-        let td = document.createElement("td");
-        let td2 = document.createElement("td");
-        td.innerHTML = "Nom";
-        td.classList.add("tablehead");
-        td2.innerHTML = "Prénom";
-        td2.classList.add("tablehead");
-        tr.appendChild(td);
-        tr.appendChild(td2);
-        table.appendChild(tr);
+        tableaddline(true, "Nom", "Prenom");
         // add the base input
-        let tr_ = document.createElement("tr");
-        let td_ = document.createElement("td");
-        let td2_ = document.createElement("td");
-        td_.innerText = name_;
-        td2_.innerText = lastname_;
-        tr_.appendChild(td_);
-        tr_.appendChild(td2_);
-        table.appendChild(tr_);
-
-        container.style.display = "none";
-        table.hidden = false;
+        tableaddline(false, name_, lastname_);
         tablecontrols.hidden = false;
         tablecontrols.style.display = "flex";
-        refresh.hidden = false;
     } else {
         name_ = tc_name.value;
         lastname_ = tc_lastname.value;
-        let tr_ = document.createElement("tr");
-        let td_ = document.createElement("td");
-        let td2_ = document.createElement("td");
-        td_.innerText = name_;
-        td2_.innerText = lastname_;
-        tr_.appendChild(td_);
-        tr_.appendChild(td2_);
-        table.appendChild(tr_);
+        tableaddline(false, name_, lastname_);
     }
 }
 
@@ -147,65 +136,15 @@ function bonus() {
             break;
         }
     }
-
-    // put the articles in the table using a for loop
     var totalprice = 0
-
-    let table = document.getElementById("table");
-    let tr = document.createElement("tr");
-    let td = document.createElement("td");
-    let td2 = document.createElement("td");
-    let td3 = document.createElement("td");
-    let td4 = document.createElement("td");
-    td.innerHTML = "Nom";
-    td.classList.add("tablehead");
-    td2.innerHTML = "Prix";
-    td2.classList.add("tablehead");
-    td3.innerHTML = "Quantité";
-    td3.classList.add("tablehead");
-    td4.innerHTML = "Total";
-    td4.classList.add("tablehead");
-    tr.appendChild(td);
-    tr.appendChild(td2);
-    tr.appendChild(td3);
-    tr.appendChild(td4);
-    table.appendChild(tr);
+    tableaddline(true, "Nom", "Prix", "Quantité", "Total");
     for (let article in articles) {
-        let tr_ = document.createElement("tr");
-        let td_ = document.createElement("td");
-        let td2_ = document.createElement("td");
-        let td3_ = document.createElement("td");
-        let td4_ = document.createElement("td");
-        td_.innerText = article;
-        td2_.innerText = articles[article]["price"];
-        td3_.innerText = articles[article]["amount"];
-        td4_.innerText = articles[article]["amount"]*articles[article]["price"];
-        totalprice = totalprice + articles[article]["amount"]*articles[article]["price"];
-        tr_.appendChild(td_);
-        tr_.appendChild(td2_);
-        tr_.appendChild(td3_);
-        tr_.appendChild(td4_);
-        table.appendChild(tr_);
+        price = articles[article]["price"];
+        amount = articles[article]["amount"];
+        tableaddline(false, article, price, amount, price*amount);
+        totalprice = totalprice + price*amount;
     }
-
-    let tr_ = document.createElement("tr");
-    let td_ = document.createElement("td");
-    let td2_ = document.createElement("td");
-    let td3_ = document.createElement("td");
-    let td4_ = document.createElement("td");
-    td_.innerText = "";
-    td2_.innerText = "";
-    td3_.innerText = "";
-    td4_.innerText = totalprice;
-    tr_.appendChild(td_);
-    tr_.appendChild(td2_);
-    tr_.appendChild(td3_);
-    tr_.appendChild(td4_);
-    table.appendChild(tr_);
-    container.style.display = "none";
-    table.hidden = false;
-    refresh.hidden = false;
-    console.log(articles)
+    tableaddline(false, "", "", "", totalprice);
 }
 
 function refresh() {
